@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
       - name: Build
-        run: npm run build
+        run: npm install && npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
