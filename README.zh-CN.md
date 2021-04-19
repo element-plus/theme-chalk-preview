@@ -4,7 +4,7 @@
 
 预览并且下载 element-plus 主题包。
 
-点击 <a href="https://github.com/WsmDyj/element-plus-theme/">这个页面</a>.
+点击 <a href="https://github.com/element-plus/theme-chalk-preview/">这个页面</a>.
 
 - 单击标题菜单上的“更改主题颜色”按钮，在弹出的对话框中选择主题颜色，然后单击“更改”
 - 现在这个页面将应用新指定的主题颜色生成的新样式，这样您可以预览应用此颜色后元素的外观
