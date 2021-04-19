@@ -5,6 +5,7 @@ import styleImport from 'vite-plugin-style-import'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
+  root: process.cwd(),
   plugins: [
     vue(),
     styleImport({
@@ -21,5 +22,11 @@ export default defineConfig({
         },
       }]
     })
-  ]
+  ],
+  optimizeDeps: {
+    include: [
+      'element-plus/lib/locale/lang/zh-cn',
+      'element-plus/lib/locale/lang/en'
+    ]
+  },
 })

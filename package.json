@@ -1,12 +1,13 @@
 {
   "name": "element-plus-theme",
   "version": "1.0.0",
-  "description": "vue3主题下载",
+  "description": "theme-chalk-preview",
   "author": "label-fe",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "preview": "npm run build && vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
