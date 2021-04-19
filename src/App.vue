@@ -75,7 +75,8 @@ import ThemeForm from './components/theme-form/index.vue'
 import ThemeBreadcrumb from './components/theme-breadcrumb/index.vue'
 import { writeNewStyle, getStyleTemplate, generateColors } from '../src/utils'
 import { use } from 'element-plus/lib/locale'
-import zhLocale from 'element-plus/lib/locale/lang/zh-CN'
+import { locale } from 'element-plus'
+import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
 import enLocale from 'element-plus/lib/locale/lang/en'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
@@ -107,7 +108,8 @@ export default defineComponent({
     const lang = computed(() => {
       const { currentRoute } = useRouter()
       const lang = currentRoute.value.path
-      use(lang === '/zh-CN' ? zhLocale : enLocale)
+      const local = lang === '/zh-CN' ? zhLocale : enLocale
+      import.meta.env.DEV ? locale(local) : use(local)
       return lang
     })
 
