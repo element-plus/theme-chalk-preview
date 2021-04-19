@@ -74,7 +74,8 @@ import ThemeTable from './components/theme-table/index.vue'
 import ThemeForm from './components/theme-form/index.vue'
 import ThemeBreadcrumb from './components/theme-breadcrumb/index.vue'
 import { writeNewStyle, getStyleTemplate, generateColors } from '../src/utils'
-import { use } from 'element-plus/lib/locale'
+// import { use } from 'element-plus/lib/locale'
+import { locale } from 'element-plus'
 import zhLocale from 'element-plus/lib/locale/lang/zh-CN'
 import enLocale from 'element-plus/lib/locale/lang/en'
 import JSZip from 'jszip'
@@ -107,7 +108,7 @@ export default defineComponent({
     const lang = computed(() => {
       const { currentRoute } = useRouter()
       const lang = currentRoute.value.path
-      use(lang === '/zh-CN' ? zhLocale : enLocale)
+      locale(lang === '/zh-CN' ? zhLocale : enLocale)
       return lang
     })
 
