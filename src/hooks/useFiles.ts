@@ -1,11 +1,11 @@
 import { useFetch } from './useFetch'
 
 export const useFiles = () => {
-  const getFontFiles = async (fontFiles) => {
+  const getFontFiles = async (fontFiles: string[]) => {
     const fonts = await Promise.all(
-      fontFiles.map((font) => {
-        return useFetch(`//unpkg.com/element-plus/dist/fonts/${font}`, true)
-      })
+      fontFiles.map((font: string) =>
+        useFetch(`//unpkg.com/element-plus/dist/fonts/${font}`, true)
+      )
     )
     return fonts
   }
