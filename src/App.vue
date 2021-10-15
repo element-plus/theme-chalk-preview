@@ -1,73 +1,78 @@
 <template>
-  <el-container class="wrapper">
-    <el-header height="80px" :style="{ 'background-color': colors.primary }">
-      <img
-        src="./assets/element-plus.svg"
-        alt="element-logo"
-        class="header-logo"
-      />
-      <ul class="header-operations">
-        <li @click="visible = true">{{ langConfig.header.switch[lang] }}</li>
-        <li
-          class="header-download"
-          :class="{ 'is-available': canDownload }"
-          @click="downloadZip"
-        >
-          {{ langConfig.header.download[lang] }}
-        </li>
-        <li @click="helpDialogVisible = true">
-          {{ langConfig.header.help[lang] }}
-        </li>
-        <li>
-          <router-link
-            to="/zh-CN"
-            :class="{ 'is-active': lang === '/zh-CN' }"
-            class="header-lang"
+  <el-config-provider :locale="langLocale">
+    <el-container class="wrapper">
+      <el-header height="80px" :style="{ 'background-color': colors.primary }">
+        <img
+          src="./assets/element-plus.svg"
+          alt="element-logo"
+          class="header-logo"
+        />
+        <ul class="header-operations">
+          <li @click="visible = true">{{ langConfig.header.switch[lang] }}</li>
+          <li
+            class="header-download"
+            :class="{ 'is-available': canDownload }"
+            @click="downloadZip"
           >
-            中文
-          </router-link>
-          <span>/</span>
-          <router-link
-            to="/en-US"
-            :class="{ 'is-active': lang === '/en-US' }"
-            class="header-lang"
-          >
-            En
-          </router-link>
-        </li>
-      </ul>
-    </el-header>
-    <el-container>
-      <el-aside class="menu">
-        <theme-menu :lang="lang"></theme-menu>
-      </el-aside>
-      <el-main class="content">
-        <theme-breadcrumb :lang="lang"></theme-breadcrumb>
-        <theme-form :lang="lang"></theme-form>
-        <theme-table :lang="lang"></theme-table>
-      </el-main>
+            {{ langConfig.header.download[lang] }}
+          </li>
+          <li @click="helpDialogVisible = true">
+            {{ langConfig.header.help[lang] }}
+          </li>
+          <li>
+            <router-link
+              to="/zh-CN"
+              :class="{ 'is-active': lang === '/zh-CN' }"
+              class="header-lang"
+            >
+              中文
+            </router-link>
+            <span>/</span>
+            <router-link
+              to="/en-US"
+              :class="{ 'is-active': lang === '/en-US' }"
+              class="header-lang"
+            >
+              En
+            </router-link>
+          </li>
+        </ul>
+      </el-header>
+      <el-container>
+        <el-aside class="menu">
+          <theme-menu :lang="lang"></theme-menu>
+        </el-aside>
+        <el-main class="content">
+          <theme-breadcrumb :lang="lang"></theme-breadcrumb>
+          <theme-form :lang="lang"></theme-form>
+          <theme-table :lang="lang"></theme-table>
+        </el-main>
+      </el-container>
+      <el-dialog
+        center
+        v-model="visible"
+        :title="langConfig.header.switch[lang]"
+        width="400px"
+      >
+        <theme-pick :lang="lang" @submit="submitForm"></theme-pick>
+      </el-dialog>
+      <el-dialog
+        v-model="helpDialogVisible"
+        :title="langConfig.help.title[lang]"
+      >
+        <div v-html="langConfig.help.content[lang]" class="help"></div>
+        <template #footer>
+          <el-button type="primary" @click="helpDialogVisible = false">{{
+            langConfig.help.ok[lang]
+          }}</el-button>
+        </template>
+      </el-dialog>
     </el-container>
-    <el-dialog
-      center
-      v-model="visible"
-      :title="langConfig.header.switch[lang]"
-      width="400px"
-    >
-      <theme-pick :lang="lang" @submit="submitForm"></theme-pick>
-    </el-dialog>
-    <el-dialog v-model="helpDialogVisible" :title="langConfig.help.title[lang]">
-      <div v-html="langConfig.help.content[lang]" class="help"></div>
-      <template #footer>
-        <el-button type="primary" @click="helpDialogVisible = false">{{
-          langConfig.help.ok[lang]
-        }}</el-button>
-      </template>
-    </el-dialog>
-  </el-container>
+  </el-config-provider>
 </template>
 
 <script setup>
-import { defineComponent, computed, ref, reactive, toRefs } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import { langConfig } from './constant'
 import { useFiles } from './hooks/useFiles'
 import { useRouter } from 'vue-router'
@@ -77,12 +82,10 @@ import ThemeTable from './components/theme-table/index.vue'
 import ThemeForm from './components/theme-form/index.vue'
 import ThemeBreadcrumb from './components/theme-breadcrumb/index.vue'
 import { writeNewStyle, getStyleTemplate, generateColors } from '../src/utils'
-import { use } from 'element-plus/lib/locale'
-import { locale } from 'element-plus'
-import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
-import enLocale from 'element-plus/lib/locale/lang/en'
 import JSZip from 'jszip'
 import FileSaver from 'file-saver'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import en from 'element-plus/es/locale/lang/en'
 
 const { getFontFiles, getIndexStyle, getSeparatedStyles } = useFiles()
 
@@ -102,9 +105,12 @@ const fontFiles = ['element-icons.ttf', 'element-icons.woff']
 const lang = computed(() => {
   const { currentRoute } = useRouter()
   const lang = currentRoute.value.path
-  const local = lang === '/zh-CN' ? zhLocale : enLocale
-  import.meta.env.DEV ? locale(local) : use(local)
+
   return lang
+})
+
+const langLocale = computed(() => {
+  return lang.value === '/zh-CN' ? zhCn : en
 })
 
 const originalStylesheetCount = computed(() => {

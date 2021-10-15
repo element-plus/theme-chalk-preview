@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "types": ["vite/client", "element-plus/global"],
+    "lib": ["ESNext"],
+    "noImplicitAny": false,
+    "moduleResolution": "Node"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

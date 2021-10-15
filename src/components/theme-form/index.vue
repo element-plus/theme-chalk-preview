@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, reactive } from 'vue'
+import { reactive } from 'vue'
 import { langConfig } from '../../constant'
 
 defineProps({
@@ -40,6 +40,6 @@ defineProps({
 const query = reactive({
   name: '',
   dateHolder: '',
-  date: '',
+  date: null,
 })
 </script>
