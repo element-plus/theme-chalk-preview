@@ -1,4 +1,5 @@
-export const formula =  {
+export const formula = {
+  "darken-1": "color(primary lightness(-10%))",
   "shade-1": "color(primary shade(10%))",
   "light-1": "color(primary tint(10%))",
   "light-2": "color(primary tint(20%))",
