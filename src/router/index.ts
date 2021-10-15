@@ -1,6 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import type { App } from 'vue'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/zh-CN',
@@ -9,12 +10,12 @@ const routes = [
   {
     path: '/zh-CN',
     name: 'cn',
-    component: () => import(/* webpackChunkName: "layout" */ '../App.vue'),
+    component: () => import('../App.vue'),
   },
   {
     path: '/en-US',
     name: 'en',
-    component: () => import(/* webpackChunkName: "layout" */ '../App.vue'),
+    component: () => import('../App.vue'),
   },
 ]
 
@@ -23,7 +24,4 @@ const router = createRouter({
   routes: routes,
 })
 
-// config router
-export function setupRouter(app) {
-  app.use(router)
-}
+export const setupRouter = (app: App) => app.use(router)
