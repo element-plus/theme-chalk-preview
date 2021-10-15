@@ -4,18 +4,18 @@ const routes = [
   {
     path: '/',
     redirect: '/zh-CN',
-    name: 'home'
+    name: 'home',
   },
   {
     path: '/zh-CN',
     name: 'cn',
-    component: () => import(/* webpackChunkName: "layout" */ '../App.vue')
+    component: () => import(/* webpackChunkName: "layout" */ '../App.vue'),
   },
   {
     path: '/en-US',
     name: 'en',
-    component: () => import(/* webpackChunkName: "layout" */ '../App.vue')
-  }
+    component: () => import(/* webpackChunkName: "layout" */ '../App.vue'),
+  },
 ]
 
 const router = createRouter({
@@ -24,6 +24,6 @@ const router = createRouter({
 })
 
 // config router
-export function setupRouter (app) {
+export function setupRouter(app) {
   app.use(router)
 }

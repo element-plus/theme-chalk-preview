@@ -5,21 +5,14 @@
     <el-menu-item index="3">{{ langConfig.menu.pageThree[lang] }}</el-menu-item>
   </el-menu>
 </template>
-<script>
-import { defineComponent } from 'vue'
+
+<script setup>
 import { langConfig } from '../../constant'
-export default defineComponent({
-  props: {
-    lang: {
-      type: String,
-      default: '/zh-CN'
-    }
-  },
-  setup() {
-    return {
-      langConfig
-    }
+
+defineProps({
+  lang: {
+    type: String,
+    default: '/zh-CN',
   },
 })
 </script>
-

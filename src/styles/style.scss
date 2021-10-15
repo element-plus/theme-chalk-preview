@@ -4,8 +4,8 @@ body {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft YaHei", SimSun, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', SimSun, sans-serif;
 }
 
 * {
@@ -32,7 +32,7 @@ header {
 
 header::after {
   display: inline-block;
-  content: "";
+  content: '';
   height: 100%;
   vertical-align: middle;
 }
@@ -95,7 +95,7 @@ header::after {
 
 .header-operations::after {
   display: inline-block;
-  content: "";
+  content: '';
   height: 100%;
   vertical-align: middle;
 }
